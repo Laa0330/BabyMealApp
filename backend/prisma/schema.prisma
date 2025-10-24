@@ -1,0 +1,45 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Infant {
+  id        String  @id @default(cuid())
+  name      String
+  birthDate DateTime?
+  feeds     Feed[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Feed {
+  id        String   @id @default(cuid())
+  infantId  String
+  infant    Infant   @relation(fields: [infantId], references: [id], onDelete: Cascade)
+  type      FeedType
+  side      NursingSide?
+  amountMl  Int?
+  notes     String?
+  startedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([infantId, startedAt])
+}
+
+enum FeedType {
+  breast_milk
+  formula
+  solid
+}
+
+enum NursingSide {
+  left
+  right
+  both
+}

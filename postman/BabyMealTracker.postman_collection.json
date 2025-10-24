@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "BabyMealTracker",
+    "_postman_id": "bmt-feeding-2025-10-24T20:17:25.819676",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base}}/health",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Feed",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"infantId\": \"seed_infant\",\n  \"type\": \"formula\",\n  \"amountMl\": 120\n}"
+        }
+      },
+      "url": "{{base}}/api/feeds"
+    },
+    {
+      "name": "List Feeds",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base}}/api/feeds?infantId=seed_infant"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base",
+      "value": "http://localhost:4000"
+    }
+  ]
+}

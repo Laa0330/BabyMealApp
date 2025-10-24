@@ -1,0 +1,15 @@
+openapi: 3.0.3
+info: {title: Baby Meal Tracker - Feeding API, version: 1.0.0}
+servers: [{url: http://localhost:4000}]
+paths:
+  /health:
+    get: {summary: Health check, responses: {'200': {description: OK}}}
+  /api/feeds:
+    get:
+      summary: List feeds
+      responses: {'200': {description: Feeds list}}
+    post: {summary: Create feed, responses: {'201': {description: Created}}}
+  /api/feeds/{id}:
+    get: {summary: Get feed by id, responses: {'200': {description: OK}, '404': {description: Not found}}}
+    patch: {summary: Update feed, responses: {'200': {description: Updated}, '404': {description: Not found}}}
+    delete: {summary: Delete feed, responses: {'204': {description: Deleted}, '404': {description: Not found}}}
