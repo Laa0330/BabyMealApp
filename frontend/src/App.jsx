@@ -32,10 +32,7 @@ export default function App() {
 
   return (
     <Routes>
-      {/* Public: Login */}
       <Route path="/" element={<Auth onLogin={handleLogin} />} />
-
-      {/* Private: wrap bằng ProtectedRoute */}
       <Route
         path="/app"
         element={
@@ -57,8 +54,6 @@ export default function App() {
           </ProtectedRoute>
         }
       />
-
-      {/* Fallback */}
       <Route path="*" element={<Auth onLogin={handleLogin} />} />
     </Routes>
   );
