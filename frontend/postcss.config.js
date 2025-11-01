@@ -1,5 +1,5 @@
 export default {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  theme: { extend: {} },
+  plugins: [],
 };
