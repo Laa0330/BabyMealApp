@@ -21,8 +21,6 @@ model Feed {
   id        String   @id @default(cuid())
   infantId  String
   infant    Infant   @relation(fields: [infantId], references: [id], onDelete: Cascade)
-  type      FeedType
-  side      NursingSide?
   amountMl  Int?
   notes     String?
   startedAt DateTime @default(now())
@@ -32,14 +30,6 @@ model Feed {
   @@index([infantId, startedAt])
 }
 
-enum FeedType {
-  breast_milk
-  formula
-  solid
-}
 
-enum NursingSide {
-  left
-  right
-  both
-}
+
+

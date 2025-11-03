@@ -6,8 +6,7 @@ const router = Router();
 
 const FeedCreate = z.object({
   infantId: z.string().cuid(),
-  type: z.enum(['breast_milk', 'formula', 'solid']),
-  side: z.enum(['left', 'right', 'both']).optional(),
+  type: z.enum(['Milk', 'Formula', 'Solid', 'Water']),
   amountMl: z.number().int().positive().max(2000).optional(),
   notes: z.string().max(500).optional(),
   startedAt: z.string().datetime().optional(),
@@ -18,9 +17,9 @@ const FeedUpdate = FeedCreate.partial();
 router.post('/', async (req, res) => {
   const parsed = FeedCreate.safeParse(req.body);
   if (!parsed.success) return res.status(400).json(parsed.error);
-  const { infantId, type, side, amountMl, notes, startedAt } = parsed.data;
+  const { infantId, type, amountMl, notes, startedAt } = parsed.data;
   const feed = await prisma.feed.create({
-    data: { infantId, type, side, amountMl, notes, startedAt: startedAt ? new Date(startedAt) : undefined }
+    data: { infantId, type, amountMl, notes, startedAt: startedAt ? new Date(startedAt) : undefined }
   });
   res.status(201).json(feed);
 });
