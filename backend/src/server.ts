@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import feedsRouter from './routes/feeds.js';
+import feedsRouter from './routes/feeds.ts';
 
 const app = express();
 app.use(cors());
