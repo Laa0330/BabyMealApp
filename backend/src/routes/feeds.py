@@ -20,7 +20,7 @@ class Feed(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(uuid4()))
     infant_id = Column(String, ForeignKey("infants.id"), nullable=False)
-    type = Column(Enum("Milk", "Formula", "Solid", "Water", name="feed_type"), nullable=False)
+    type = Column(Enum("Breast", "Bottle", "Solid", "Snack", name="feed_type"), nullable=False)
     amount_ml = Column(Integer)
     notes = Column(String(500))
     started_at = Column(DateTime)
@@ -33,7 +33,7 @@ class Feed(Base):
 
 class FeedCreate(BaseModel):
     infantId: str = Field(..., min_length=1)
-    type: str = Field(..., regex="^(Milk|Formula|Solid|Water)$")
+    type: str = Field(..., regex="^(Breast|Bottle|Solid|Snack)$")
     amountMl: Optional[int] = Field(None, ge=1, le=2000)
     notes: Optional[str] = Field(None, max_length=500)
     startedAt: Optional[datetime] = None
@@ -41,7 +41,7 @@ class FeedCreate(BaseModel):
 
 class FeedUpdate(BaseModel):
     infantId: Optional[str] = None
-    type: Optional[str] = Field(None, regex="^(Milk|Formula|Solid|Water)$")
+    type: Optional[str] = Field(None, regex="^(Breast|Bottle|Solid|Snack)$")
     amountMl: Optional[int] = Field(None, ge=1, le=2000)
     notes: Optional[str] = Field(None, max_length=500)
     startedAt: Optional[datetime] = None
@@ -88,7 +88,7 @@ def list_feeds(
     infantId: Optional[str] = None,
     dateFrom: Optional[datetime] = None,
     dateTo: Optional[datetime] = None,
-    type: Optional[str] = Query(None, regex="^(Milk|Formula|Solid|Water)$"),
+    type: Optional[str] = Query(None, regex="^(Breast|Bottle|Solid|Snack)$"),
     limit: int = Query(25, ge=1, le=100),
     cursor: Optional[str] = None,
     db: Session = Depends(get_db),
