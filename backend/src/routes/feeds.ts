@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
     infantId: z.string().cuid().optional(),
     dateFrom: z.string().datetime().optional(),
     dateTo: z.string().datetime().optional(),
-    type: z.enum(['breast_milk', 'formula', 'solid']).optional(),
+    type: z.enum(['Milk', 'Formula', 'Solid', 'Water']).optional(),
     limit: z.coerce.number().int().min(1).max(100).default(25),
     cursor: z.string().cuid().optional(),
   });
